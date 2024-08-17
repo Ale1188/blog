@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ post.title }}{% endblock title %}
+
+{% block content %}
+<h2>Edit Post</h2>
+<form method="post" class="m-2">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" class="btn btn-success" value="Save changes">
+</form>
+<a href="{% url 'list' %}" class="btn btn-secondary">Cancel</a>
+<!-- <a href="{% url 'detail' object.pk %}" class="btn btn-secondary">Cancel</a> -->
+{% endblock %}
