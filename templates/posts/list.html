@@ -12,6 +12,15 @@
         <p class="card-text">{{ post.body|truncatechars:64 }}</p>
         <a href="{% url 'detail' post.id %}" class="btn btn-sm btn-dark m-1">Continue reading...</a>
         <a href="{% url 'edit' post.id%}" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
+        {% if user.is_authenticated %}
+            {% if user == post.author %}
+                <form method="POST" action="{% url 'update_to_draft' post.id %}">
+                    {% csrf_token %}
+                    <input type="hidden" id="id_status" name="status" value="2">
+                    <input type="submit" class="card_link" value="Draft">
+                </form>
+                {% endif %}
+        {% endif %}
     </div>
 </div>
 <br/>
